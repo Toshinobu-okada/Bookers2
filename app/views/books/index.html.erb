@@ -1,0 +1,64 @@
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this obj from being saved:
+  <% @book.errors.full_messages.each do |message| %>
+  <%= message %>
+  <% end %>
+<% end %>
+
+<div>
+  <h2>User info</h2>
+  <div></div>
+  <table>
+    <tbody>
+      <tr><%= attachment_image_tag @user, :profile_image_id, :fill, 40, 40, fallback: "no_image-ede28af4bad96368ef41be1b4be1cffce0d9402540f75d17895e32cb0d2af5e6" %></tr>
+      <tr>
+        <th>name</th>
+        <th><%= @user.name %></th>
+      </tr>
+      <tr>
+        <th>introduction</th>
+        <th><%= @user.introduction %></th>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div></div>
+
+<h2>New book</h2>
+<%= form_with model: @book, local:true do |f| %>
+  <h4>Title</h4>
+  <%= f.text_field :title %>
+  <h4>Opinion</h4>
+  <%= f.text_area :body %>
+  <%= f.submit 'Create book' %>
+<% end %>
+
+<div>
+  <h2>Books</h2>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Title</th>
+        <th>Opinion</th>
+        <Th></Th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @books.each do |book| %>
+      <tr>
+        <td>
+          <%= attachment_image_tag book.user, :profile_image_id, :fill, 40, 40, fallback: "no_image-ede28af4bad96368ef41be1b4be1cffce0d9402540f75d17895e32cb0d2af5e6" %>
+        </td>
+        <td>
+          <%= book.title %>
+        </td>
+        <td>
+          <%= book.body %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
